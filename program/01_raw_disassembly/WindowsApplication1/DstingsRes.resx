@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="String1TabLogic" xml:space="preserve">
+    <value> 逻辑分析仪 </value>
+  </data>
+  <data name="StringRiseTimeValue" xml:space="preserve">
+    <value>上升时间</value>
+  </data>
+  <data name="StringToolBar" xml:space="preserve">
+    <value>工具条</value>
+  </data>
+  <data name="StringStop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="StringView" xml:space="preserve">
+    <value>视图</value>
+  </data>
+  <data name="StringText" xml:space="preserve">
+    <value>文本警告</value>
+  </data>
+  <data name="StringZero" xml:space="preserve">
+    <value>零位置</value>
+  </data>
+  <data name="StringGrid" xml:space="preserve">
+    <value>背景格</value>
+  </data>
+  <data name="StringFile" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="StringExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="StringDuty" xml:space="preserve">
+    <value>占空比</value>
+  </data>
+  <data name="StringDots" xml:space="preserve">
+    <value>虚线</value>
+  </data>
+  <data name="StringHelp" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="StringOpen" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="StringHorizontal" xml:space="preserve">
+    <value>横向</value>
+  </data>
+  <data name="StringFreqTab" xml:space="preserve">
+    <value>频率</value>
+  </data>
+  <data name="StringExtTrigger" xml:space="preserve">
+    <value>外触发</value>
+  </data>
+  <data name="StringTabpageSIGNAL" xml:space="preserve">
+    <value>信号发生器  </value>
+  </data>
+  <data name="StringMinValue" xml:space="preserve">
+    <value>最小值</value>
+  </data>
+  <data name="StringTrigger" xml:space="preserve">
+    <value>触发</value>
+  </data>
+  <data name="StringTrigStart" xml:space="preserve">
+    <value>启动一次外触发采集</value>
+  </data>
+  <data name="StringSaveData" xml:space="preserve">
+    <value>保存数据</value>
+  </data>
+  <data name="StringPrintSetup" xml:space="preserve">
+    <value>打印设置</value>
+  </data>
+  <data name="StringTrigerType_norm" xml:space="preserve">
+    <value>常规触发</value>
+  </data>
+  <data name="StringLinetype" xml:space="preserve">
+    <value>线类型</value>
+  </data>
+  <data name="StringTabpageOSILLA" xml:space="preserve">
+    <value>示波器     </value>
+  </data>
+  <data name="StringAC" xml:space="preserve">
+    <value>交流耦合</value>
+  </data>
+  <data name="StringDC" xml:space="preserve">
+    <value>直流耦合</value>
+  </data>
+  <data name="StringOn" xml:space="preserve">
+    <value>开</value>
+  </data>
+  <data name="StringMaxValue" xml:space="preserve">
+    <value>最大值</value>
+  </data>
+  <data name="StringFuncLogic" xml:space="preserve">
+    <value>逻辑分析仪</value>
+  </data>
+  <data name="StringOpenFailedTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="StringPeriodValue" xml:space="preserve">
+    <value>周期</value>
+  </data>
+  <data name="StringFuncOsilla" xml:space="preserve">
+    <value>示波器</value>
+  </data>
+  <data name="StringAltitu" xml:space="preserve">
+    <value>幅度</value>
+  </data>
+  <data name="StringSaveSettingCheck" xml:space="preserve">
+    <value>下次打开时使用当前配置</value>
+  </data>
+  <data name="StringFormat" xml:space="preserve">
+    <value>格式</value>
+  </data>
+  <data name="StringReviewRes" xml:space="preserve">
+    <value>波形数据回放完毕</value>
+  </data>
+  <data name="StringNegWidthValue" xml:space="preserve">
+    <value>负脉宽</value>
+  </data>
+  <data name="StringSampleRate" xml:space="preserve">
+    <value>采样率</value>
+  </data>
+  <data name="StringCh2Couple" xml:space="preserve">
+    <value>ch2耦合</value>
+  </data>
+  <data name="StringVectors" xml:space="preserve">
+    <value>实线</value>
+  </data>
+  <data name="StringDutyValue" xml:space="preserve">
+    <value>占空比</value>
+  </data>
+  <data name="StringReviewRes2" xml:space="preserve">
+    <value>Review has been done.</value>
+  </data>
+  <data name="StringOffset" xml:space="preserve">
+    <value>偏置</value>
+  </data>
+  <data name="StringNotice" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="StringFreqValue" xml:space="preserve">
+    <value>频率</value>
+  </data>
+  <data name="StringResetZero" xml:space="preserve">
+    <value>电压值归零校准</value>
+  </data>
+  <data name="StringSaveSetup" xml:space="preserve">
+    <value>保存设置</value>
+  </data>
+  <data name="StringNotice2" xml:space="preserve">
+    <value>NOTICE</value>
+  </data>
+  <data name="StringOpenFailedInfo" xml:space="preserve">
+    <value>请正确连接设备</value>
+  </data>
+  <data name="StringPosWidthValue" xml:space="preserve">
+    <value>正脉宽</value>
+  </data>
+  <data name="StringTimePerDIV" xml:space="preserve">
+    <value>时/格</value>
+  </data>
+  <data name="StringMousePos" xml:space="preserve">
+    <value>鼠标位置</value>
+  </data>
+  <data name="StringTrigerType_Single" xml:space="preserve">
+    <value>单次触发</value>
+  </data>
+  <data name="StringFuncSignal" xml:space="preserve">
+    <value>示波器+信号发生器</value>
+  </data>
+  <data name="StringPPValue" xml:space="preserve">
+    <value>峰峰值</value>
+  </data>
+  <data name="StringIntensity" xml:space="preserve">
+    <value>明暗</value>
+  </data>
+  <data name="StringFFT" xml:space="preserve">
+    <value>快速傅里叶变换</value>
+  </data>
+  <data name="StringOff" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="StringAverageValue" xml:space="preserve">
+    <value>平均值</value>
+  </data>
+  <data name="StringShowTaskBarCheck" xml:space="preserve">
+    <value>不显示任务栏</value>
+  </data>
+  <data name="StringOneInstance" xml:space="preserve">
+    <value>程序已经在运行中...</value>
+  </data>
+  <data name="StringTrigerType" xml:space="preserve">
+    <value>触发状态</value>
+  </data>
+  <data name="StringCalibrate" xml:space="preserve">
+    <value>校准</value>
+  </data>
+  <data name="StringVertical" xml:space="preserve">
+    <value>纵向</value>
+  </data>
+  <data name="StringState" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="StringStart" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="StringProbe" xml:space="preserve">
+    <value>探头</value>
+  </data>
+  <data name="StringPrint" xml:space="preserve">
+    <value>打印</value>
+  </data>
+  <data name="StringVolt1" xml:space="preserve">
+    <value>电压1（伏/格）</value>
+  </data>
+  <data name="StringVolt2" xml:space="preserve">
+    <value>电压2（伏/格）</value>
+  </data>
+  <data name="StringTitle" xml:space="preserve">
+    <value>SainSmart DDS140 </value>
+  </data>
+  <data name="StringAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="StringGrid1" xml:space="preserve">
+    <value>格子</value>
+  </data>
+  <data name="StringHeavy" xml:space="preserve">
+    <value>亮</value>
+  </data>
+  <data name="StringMusic" xml:space="preserve">
+    <value>声音警告</value>
+  </data>
+  <data name="StringModel" xml:space="preserve">
+    <value>型号</value>
+  </data>
+  <data name="Stringlight" xml:space="preserve">
+    <value>暗</value>
+  </data>
+  <data name="StringControlWND" xml:space="preserve">
+    <value>控制窗口</value>
+  </data>
+  <data name="StringUtility" xml:space="preserve">
+    <value>效用</value>
+  </data>
+  <data name="StringChannel" xml:space="preserve">
+    <value>通道</value>
+  </data>
+  <data name="StringPrintPreview" xml:space="preserve">
+    <value>打印预览</value>
+  </data>
+  <data name="StringWaveForm" xml:space="preserve">
+    <value>波形</value>
+  </data>
+  <data name="StringVrmsValue" xml:space="preserve">
+    <value>有效值</value>
+  </data>
+  <data name="StringLockSetting" xml:space="preserve">
+    <value>锁定配置</value>
+  </data>
+  <data name="StringSaveAsText" xml:space="preserve">
+    <value>存为文件</value>
+  </data>
+  <data name="StringCh1Couple" xml:space="preserve">
+    <value>ch1耦合</value>
+  </data>
+  <data name="StringContent" xml:space="preserve">
+    <value>说明</value>
+  </data>
+  <data name="StringLoadSetup" xml:space="preserve">
+    <value>加载设置</value>
+  </data>
+  <data name="StringWarnning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="StringMeasure" xml:space="preserve">
+    <value>测量窗口</value>
+  </data>
+  <data name="StringTrigerType_no" xml:space="preserve">
+    <value>无触发</value>
+  </data>
+  <data name="StringNormalSig" xml:space="preserve">
+    <value>常规信号波形输出</value>
+  </data>
+  <data name="StringNotifuShow" xml:space="preserve">
+    <value>最小化时在托盘显示</value>
+  </data>
+  <data name="StringDisplay" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="StringDefaultSetup" xml:space="preserve">
+    <value>默认设置</value>
+  </data>
+  <data name="StringRecordReview" xml:space="preserve">
+    <value>录制与回放</value>
+  </data>
+</root>

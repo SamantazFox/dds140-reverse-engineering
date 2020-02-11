@@ -1,0 +1,24 @@
+[1000]		[ 23] +base[  24]	DllMain
+[1080]		[  0] + base[  1] 	AiReadBulkData
+[1100]		[ 17] + base[ 18] 	SetReadEnableOrNot
+[1110]		[ 18] + base[ 19] 	SetStableEnableOrNot
+[1120]		[ 16] + base[ 17] 	SetInfo
+[1160]		[ 10] + base[ 11] 	GetHWbufferSize
+[1170]		[ 19] + base[ 20] 	SetTrigInfo
+[1190]		[ 11] + base[ 12] 	GetInfoByte
+[11c0]		[ 12] + base[ 13] 	GetInfodouble
+[1200]		[ 13] + base[ 14] 	GetRawData4Read
+[1220]		[  7] + base[  8] 	GetBuffer4Read
+[12b0]		[  8] + base[  9] 	GetBuffer4Wr
+[12c0]		[  2] + base[  3] 	BufferInit
+[12d0]		[  3] + base[  4] 	DataPreDisposal
+[1fe0]		[  9] + base[ 10] 	GetData
+[2170]		[ 15] + base[ 16] 	SetData
+[2340]		[  1] + base[  2] 	AutoMeasurement
+[2fc0]		[ 20] + base[ 21] 	TrigDataPrepare
+[33d0]		[ 22] + base[ 23] 	USBCtrlTransSimple
+[3430]		[ 21] + base[ 22] 	USBCtrlTrans
+[34f0]		[  6] + base[  7] 	EventCheck
+[3630]		[ 14] + base[ 15] 	ResetPipe
+[3770]		[  5] + base[  6] 	DeviceOpen
+[37c0]		[  4] + base[  5] 	DeviceClose
