@@ -1,0 +1,16 @@
+100012c0:	c3                   	ret    
+100012c1:	cc                   	int3   
+100012c2:	cc                   	int3   
+100012c3:	cc                   	int3   
+100012c4:	cc                   	int3   
+100012c5:	cc                   	int3   
+100012c6:	cc                   	int3   
+100012c7:	cc                   	int3   
+100012c8:	cc                   	int3   
+100012c9:	cc                   	int3   
+100012ca:	cc                   	int3   
+100012cb:	cc                   	int3   
+100012cc:	cc                   	int3   
+100012cd:	cc                   	int3   
+100012ce:	cc                   	int3   
+100012cf:	cc                   	int3   
