@@ -28,7 +28,7 @@
 [3630]  [sym]  ResetPipe
 
 [3670]  [unk]  unknown_10003670
-[3750]  [unk]  unknown_10003750
+[3750]  [fun]  free_interface
 
 [3770]  [sym]  DeviceOpen
 [37c0]  [sym]  DeviceClose
@@ -54,6 +54,17 @@
 [3a58]  [unk]  unknown_10003a58
 [3b1b]  [unk]  unknown_10003b1b
 
+[3e9c]  [unk]  unknown_10003e9c  ; see ds:0x1001003c
+[3f0d]  [unk]  unknown_10003f0d  ; see ds:0x10010038
+[3f8d]  [unk]  unknown_10003f8d  ; see ds:0x10010028
+[3fa3]  [unk]  unknown_10003fa3  ; see ds:0x10010034
+[3fe3]  [unk]  unknown_10003fe3  ; see ds:0x10010020
+[4017]  [unk]  unknown_10004017  ; see ds:0x10010024
+[4025]  [unk]  unknown_10004025  ; see ds:0x1001001c
+[48a3]  [unk]  unknown_100048a3  ; see ds:0x10010030
+[4929]  [unk]  unknown_10004929  ; see ds:0x10010018 / ds:0x1001002c
+
+[494a]  [unk]  unknown_1000494a
 [4969]  [unk]  unknown_10004969
 [49ce]  [unk]  unknown_100049ce
 
