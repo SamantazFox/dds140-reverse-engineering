@@ -33,6 +33,10 @@ USBCtrlTrans
 +-----+------------------------------------------------------------------------+
 |  36 | Oscilloscope - Send Control byte 1                                     |
 +-----+------------------------------------------------------------------------+
+|  52 | Select mode. Associated values:                                        |
+|     |   - 0: Oscilloscope and/or Signal generator                            |
+|     |   - 1: Logic analyzer                                                  |
++-----+------------------------------------------------------------------------+
 | 144 | Oscilloscope - Get bias Voltage data. Associated values:               |
 |     |   -  1: CH1 - Vbias Zero  - 1 V range                                  |
 |     |   -  2: CH2 - Vbias Zero  - 1 V range                                  |
