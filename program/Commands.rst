@@ -209,6 +209,22 @@ Vbias (?????)
 
 
 
+AC/DC coupling
+``````````````
+
+Switch to DC coupling:
+
+.. code::
+	g_CtrlByte0 &= 239;
+	g_CtrlByte0 |= 16;
+
+Switch to AC coupling:
+
+.. code::
+	g_CtrlByte0 &= 239;
+
+
+
 Channel 2 (id 1 in software)
 ----------------------------
 
@@ -275,6 +291,22 @@ Vbias (?????)
 	Vbias_Scale_ch1_200mV = (double) ((float) USBCtrlTrans(144,  7, 1u) * 2f / 255f );
 	Vbias_Scale_ch1_100mV = (double) ((float) USBCtrlTrans(144, 12, 1u) * 2f / 255f );
 	Vbias_Scale_ch1_050mV = (double) ((float) USBCtrlTrans(144, 13, 1u) * 2f / 255f );
+
+
+
+AC/DC coupling
+``````````````
+
+Switch to DC coupling:
+
+.. code::
+	g_CtrlByte1 &= 239;
+	g_CtrlByte1 |= 16;
+
+Switch to AC coupling:
+
+.. code::
+	g_CtrlByte1 &= 239;
 
 
 
