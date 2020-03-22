@@ -2,7 +2,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 {
 	switch (i)
 	{
-		case 0u:
+		case 0u:   // 2V scale
 			g_CtrlByte1 &= 247;
 			g_CtrlByte1 |= 8;
 
@@ -11,7 +11,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 
 			break;
 
-		case 1u:
+		case 1u:   // 1V scale
 			g_CtrlByte1 &= 247;
 			g_CtrlByte1 |= 8;
 
@@ -20,7 +20,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 
 			break;
 
-		case 2u:
+		case 2u:   // 0.5V scale
 			g_CtrlByte1 &= 247;
 			g_CtrlByte1 |= 8;
 
@@ -29,7 +29,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 
 			break;
 
-		case 3u:
+		case 3u:   // 200mV scale
 			g_CtrlByte1 &= 247;
 
 			USBCtrlTrans(34, 0, 1u);
@@ -37,7 +37,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 
 			break;
 
-		case 4u:
+		case 4u:   // 100mV scale
 			g_CtrlByte1 &= 247;
 
 			USBCtrlTrans(34, 2, 1u);
@@ -45,7 +45,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 
 			break;
 
-		case 5u:
+		case 5u:   // 50mV scale
 			g_CtrlByte1 &= 247;
 
 			USBCtrlTrans(34, 4, 1u);
@@ -53,7 +53,7 @@ private void VoltageKnoB11_MYSelectChangedevent2(uint i)
 
 			break;
 
-		case 9u:
+		case 9u:   // 5V scale
 			g_CtrlByte1 &= 247;
 			g_CtrlByte1 |= 8;
 

@@ -98,6 +98,27 @@ points to render.
 Programatically
 ```````````````
 
+In order to have the 200M range, control byte 1's bit 0 has to be set.
+It seems to enable a "channel merging" mode (which probably mean that only CH1
+can be used).
+
+Here is the associated code:
+
+.. code::
+	g_CtrlByte1 &= 254; // All positions/ranges
+	g_CtrlByte1 |= 1;   // Only when Knob position is "9u" (200M range)
+
+
+The control byte 1 is then sent to the device with:
+
+.. code::
+	USBCtrlTrans( 36, (ushort) g_CtrlByte1, 1u);
+	sleep(10); // Wait for device to switch a relay?
+
+
+Then, the control byte 0 is changed according to the table below.
+See the "control_bytes.rst" file for actual values.
+
 +------------+-------------+-------------------------+--------------------------+
 | SampleRate | CurrentFreq | Control byte operations | Stable enable            |
 +------------+-------------+-------------------------+--------------------------+
@@ -119,9 +140,9 @@ Programatically
 +------------+-------------+-------------------------+--------------------------+
 
 Note 1: The `SampleRate` is the UI displayed data, where `CurrentFreq` is the
-actual number sent to the device.
+actual number sent to the device using `SetInfo()`.
 
-Note 2: The SetStableEnableOrNot() function seems to be here to tell the device
+Note 2: The `SetStableEnableOrNot()` function seems to be here to tell the scope
 if the requested sample rate is stable, i.e that it corresponds to a multiple of
 it's internal crystal frequency.
 
@@ -132,21 +153,10 @@ Some tests has to be done here.
 Note 4: Some other ranges may be supported (theorically, any) but this
 hypothesis needs more to be verified.
 
-Note 5: The following operations on "control bytes" have to be done:
- * When knob position is "9u" (200M range):
- 	.. code::
- 		g_CtrlByte1 &= 254;
- 		g_CtrlByte1 |= 1;
 
- * In all other positions/ranges:
- 	.. code::
- 		g_CtrlByte1 &= 254;
-
-
-In order to update the time range, the following has to be done:
+Finally, the time range is updated with the following:
 
 .. code::
-	USBCtrlTrans( 36, (ushort) g_CtrlByte1, 1u);
 	USBCtrlTrans(148, (ushort) g_CtrlByte0, 1u);
 
 
