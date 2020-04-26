@@ -38,7 +38,7 @@ Primary (exported functions)
 | TODO    | SetInfo              |
 | RE_OK   | SetReadEnableOrNot   |
 | RE_OK   | SetStableEnableOrNot |
-| FMT     | SetTrigInfo          |
+| RE_OK   | SetTrigInfo          |
 | TODO    | TrigDataPrepare      |
 | WIP     | USBCtrlTrans         |
 | WIP     | USBCtrlTransSimple   |

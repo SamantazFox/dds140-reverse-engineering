@@ -58,6 +58,9 @@ ds:0x10016044    ; _global_ZrroUniInt
 ds:0x10016074    ; _global_BufferOffset
 ds:0x10016078    ; _global_currentSampleRate
 
+ds:0x10016080    ; _global_TrigSourceChan
+ds:0x10016081    ; _global_TrigMode
+ds:0x10016082    ; _global_TrigEdgeFlag
 ds:0x10016083    ; _global_ReadEnable
 ds:0x10016084    ; _global_HWbuffer_size
 ds:0x10016088    ; _global_HWbuffer_ptr
