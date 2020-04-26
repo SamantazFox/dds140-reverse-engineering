@@ -58,7 +58,10 @@ ds:0x10016044    ; _global_ZrroUniInt
 ds:0x10016074    ; _global_BufferOffset
 ds:0x10016078    ; _global_currentSampleRate
 
+ds:0x10016083    ; _global_ReadEnable
 ds:0x10016084    ; _global_HWbuffer_size
 ds:0x10016088    ; _global_HWbuffer_ptr
 ds:0x1001608c    ; _global_ChannelMask
 ds:0x10016090    ; _global_dataNumPerPixar
+
+ds:0x1001609c    ; _global_ReadEnable

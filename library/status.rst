@@ -36,8 +36,8 @@ Primary (exported functions)
 | RE_OK   | ResetPipe            |
 | WIP     | SetData              |
 | TODO    | SetInfo              |
-| FMT     | SetReadEnableOrNot   |
-| FMT     | SetStableEnableOrNot |
+| RE_OK   | SetReadEnableOrNot   |
+| RE_OK   | SetStableEnableOrNot |
 | FMT     | SetTrigInfo          |
 | TODO    | TrigDataPrepare      |
 | WIP     | USBCtrlTrans         |
