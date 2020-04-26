@@ -32,39 +32,39 @@ ds:0x10015210    ; _global_InterfaceHandle
 ds:0x1001522c    ; _global_1001522c (initialization flag?)
 
 
-ds:0x10016000    ; _global_CH1_FreqValue     (kHz)
-ds:0x10016008    ; _global_CH1_MaxValue      (V)
-ds:0x10016009    ; _global_CH1_MinValue      (V)
-ds:0x1001600a    ; _global_CH1_PPValue       (V)
-ds:0x1001600b    ; _global_CH1_AverageValue  (V)
-ds:0x10016010    ; _global_CH1_PeriodValue   (us)
-ds:0x10016018    ; _global_CH1_RiseTimeValue (us)
-ds:0x10016020    ; _global_CH1_PosWidthValue (us)
-ds:0x10016028    ; _global_CH1_NegWidthValue (us)
-ds:0x10016030    ; _global_CH1_DutyValue     (%)
+ds:0x10016000    ; [8] / _global_CH1_FreqValue     (kHz)
+ds:0x10016008    ; [1] / _global_CH1_MaxValue      (V)
+ds:0x10016009    ; [1] / _global_CH1_MinValue      (V)
+ds:0x1001600a    ; [1] / _global_CH1_PPValue       (V)
+ds:0x1001600b    ; [1] / _global_CH1_AverageValue  (V)
+ds:0x10016010    ; [8] / _global_CH1_PeriodValue   (us)
+ds:0x10016018    ; [8] / _global_CH1_RiseTimeValue (us)
+ds:0x10016020    ; [8] / _global_CH1_PosWidthValue (us)
+ds:0x10016028    ; [8] / _global_CH1_NegWidthValue (us)
+ds:0x10016030    ; [8] / _global_CH1_DutyValue     (%)
 
-ds:0x10016038    ; _global_CH2_FreqValue     (kHz)
-ds:0x10016040    ; _global_CH2_MaxValue      (V)
-ds:0x10016041    ; _global_CH2_MinValue      (V)
-ds:0x10016042    ; _global_CH2_PPValue       (V)
-ds:0x10016043    ; _global_CH2_AverageValue  (V)
-ds:0x10016048    ; _global_CH2_PeriodValue   (us)
-ds:0x10016050    ; _global_CH2_RiseTimeValue (us)
-ds:0x10016058    ; _global_CH2_PosWidthValue (us)
-ds:0x10016060    ; _global_CH2_NegWidthValue (us)
-ds:0x10016068    ; _global_CH2_DutyValue     (%)
+ds:0x10016038    ; [8] / _global_CH2_FreqValue     (kHz)
+ds:0x10016040    ; [1] / _global_CH2_MaxValue      (V)
+ds:0x10016041    ; [1] / _global_CH2_MinValue      (V)
+ds:0x10016042    ; [1] / _global_CH2_PPValue       (V)
+ds:0x10016043    ; [1] / _global_CH2_AverageValue  (V)
+ds:0x10016044    ; [4] / _global_ZrroUniInt        (V?)
+ds:0x10016048    ; [8] / _global_CH2_PeriodValue   (us)
+ds:0x10016050    ; [8] / _global_CH2_RiseTimeValue (us)
+ds:0x10016058    ; [8] / _global_CH2_PosWidthValue (us)
+ds:0x10016060    ; [8] / _global_CH2_NegWidthValue (us)
+ds:0x10016068    ; [8] / _global_CH2_DutyValue     (%)
 
-ds:0x10016044    ; _global_ZrroUniInt
 ds:0x10016074    ; _global_BufferOffset
 ds:0x10016078    ; _global_currentSampleRate
 
-ds:0x10016080    ; _global_TrigSourceChan
-ds:0x10016081    ; _global_TrigMode
-ds:0x10016082    ; _global_TrigEdgeFlag
-ds:0x10016083    ; _global_ReadEnable
-ds:0x10016084    ; _global_HWbuffer_size
-ds:0x10016088    ; _global_HWbuffer_ptr
+ds:0x10016080    ; [1] / _global_TrigSourceChan
+ds:0x10016081    ; [1] / _global_TrigMode
+ds:0x10016082    ; [1] / _global_TrigEdgeFlag
+ds:0x10016083    ; [1] / _global_ReadEnable
+ds:0x10016084    ; [4] / _global_HWbuffer_size
+ds:0x10016088    ; [4] / _global_HWbuffer_ptr
 ds:0x1001608c    ; _global_ChannelMask
 ds:0x10016090    ; _global_dataNumPerPixar
 
-ds:0x1001609c    ; _global_ReadEnable
+ds:0x1001609c    ; [1] / _global_ReadEnable
