@@ -37,6 +37,22 @@ USBCtrlTrans
 |     |   - 0: Oscilloscope and/or Signal generator                            |
 |     |   - 1: Logic analyzer                                                  |
 +-----+------------------------------------------------------------------------+
+| 118 | Signal generator - Load byte 2 of the "PWM" value                      |
++-----+------------------------------------------------------------------------+
+| 119 | Signal generator - Load byte 3 of the "PWM" value                      |
++-----+------------------------------------------------------------------------+
+| 120 | Signal generator - Load byte 0 of the "PWM" value                      |
++-----+------------------------------------------------------------------------+
+| 121 | Signal generator - Load byte 1 of the "PWM" value                      |
++-----+------------------------------------------------------------------------+
+| 122 | Signal generator - Load byte 2 of the "Offset" value                   |
++-----+------------------------------------------------------------------------+
+| 123 | Signal generator - Load byte 3 of the "Offset" value                   |
++-----+------------------------------------------------------------------------+
+| 124 | Signal generator - Load byte 0 of the "Offset" value                   |
++-----+------------------------------------------------------------------------+
+| 125 | Signal generator - Load byte 1 of the "Offset" value                   |
++-----+------------------------------------------------------------------------+
 | 144 | Oscilloscope - Get bias Voltage data. Associated values:               |
 |     |   -  1: CH1 - Vbias Zero  - 1 V range                                  |
 |     |   -  2: CH2 - Vbias Zero  - 1 V range                                  |
