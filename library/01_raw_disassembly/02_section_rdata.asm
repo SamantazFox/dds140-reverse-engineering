@@ -98,25 +98,11 @@
 1000d178:	9d                   	popf   
 1000d179:	cd 71                	int    0x71
 1000d17b:	a0 5d 36 fa cd       	mov    al,ds:0xcdfa365d
-1000d180:	00 00                	add    BYTE PTR [eax],al
-1000d182:	00 00                	add    BYTE PTR [eax],al
-1000d184:	00 00                	add    BYTE PTR [eax],al
-1000d186:	f0 41                	lock inc ecx
-1000d188:	00 00                	add    BYTE PTR [eax],al
-1000d18a:	00 00                	add    BYTE PTR [eax],al
-1000d18c:	00 00                	add    BYTE PTR [eax],al
-1000d18e:	80 40 00 00          	add    BYTE PTR [eax+0x0],0x0
-1000d192:	00 00                	add    BYTE PTR [eax],al
-1000d194:	00 00                	add    BYTE PTR [eax],al
-1000d196:	10 40 00             	adc    BYTE PTR [eax+0x0],al
-1000d199:	00 00                	add    BYTE PTR [eax],al
-1000d19b:	00 00                	add    BYTE PTR [eax],al
-1000d19d:	00 00                	add    BYTE PTR [eax],al
-1000d19f:	40                   	inc    eax
-1000d1a0:	00 00                	add    BYTE PTR [eax],al
-1000d1a2:	00 00                	add    BYTE PTR [eax],al
-1000d1a4:	00 00                	add    BYTE PTR [eax],al
-1000d1a6:	79 40                	jns    0x1000d1e8
+1000d180:	00 00 00 00 00 00 f0 41
+1000d188:	00 00 00 00 00 00 80 40
+1000d190:	00 00 00 00 00 00 10 40
+1000d198:	00 00 00 00 00 00 00 40
+1000d1a0:	00 00 00 00 00 00 79 40
 1000d1a8:	cd cc                	int    0xcc
 1000d1aa:	cc                   	int3   
 1000d1ab:	cc                   	int3   

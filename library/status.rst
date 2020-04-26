@@ -24,10 +24,10 @@ Primary (exported functions)
 | TODO    | DataPreDisposal      |
 | TODO    | DeviceClose          |
 | TODO    | DeviceOpen           |
-| WIP     | DllMain              |
+| RE_OK   | DllMain              |
 | WIP     | EventCheck           |
-| FMT     | GetBuffer4Read       |
-| FMT     | GetBuffer4Wr         |
+| WIP     | GetBuffer4Read       |
+| RE_OK   | GetBuffer4Wr         |
 | RE_OK   | GetData              |
 | DONE    | GetHWbufferSize      |
 | FMT     | GetInfoByte          |
