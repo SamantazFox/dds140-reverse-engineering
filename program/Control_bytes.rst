@@ -2,8 +2,9 @@ Control bytes meaning
 =====================
 
 
++++++++++++++++++++++++++++++++++++++++++
 Control byte 0
-++++++++++++++
++++++++++++++++++++++++++++++++++++++++++
 
 This control byte is sent with `USBCtrlTrans()`, using command ID 148.
 
@@ -20,11 +21,11 @@ Summary table
 CP1 - CH1 AC/DC Coupling [bit 4]
 --------------------------------
 
-+----+-------------+
-|  0 | AC Coupling |
-+----+-------------+
-|  1 | DC Coupling |
-+----+-------------+
+	+----+-------------+
+	|  0 | AC Coupling |
+	+----+-------------+
+	|  1 | DC Coupling |
+	+----+-------------+
 
 
 SPR - Sample rate [bits 3-0]
@@ -48,8 +49,10 @@ SPR - Sample rate [bits 3-0]
 
 
 
+
++++++++++++++++++++++++++++++++++++++++++
 Control byte 1
-++++++++++++++
++++++++++++++++++++++++++++++++++++++++++
 
 This control byte is sent with `USBCtrlTrans()`, using command ID 36.
 
@@ -66,11 +69,11 @@ Summary table
 CP2 - CH2 AC/DC Coupling [bit 4]
 --------------------------------
 
-+----+-------------+
-|  0 | AC Coupling |
-+----+-------------+
-|  1 | DC Coupling |
-+----+-------------+
+	+----+-------------+
+	|  0 | AC Coupling |
+	+----+-------------+
+	|  1 | DC Coupling |
+	+----+-------------+
 
 
 VR1 - CH1 Voltage range select [bit 3]
@@ -126,8 +129,10 @@ HSR - High Sample Rate [bit 0]
 
 
 
+
++++++++++++++++++++++++++++++++++++++++++
 Control byte 2
-++++++++++++++
++++++++++++++++++++++++++++++++++++++++++
 
 This control byte is sent with `USBCtrlTrans()`, using command ID 35.
 
@@ -160,8 +165,10 @@ VR2 - CH2 Voltage range select [bit 6]
 
 
 
+
++++++++++++++++++++++++++++++++++++++++++
 Control byte 3
-++++++++++++++
++++++++++++++++++++++++++++++++++++++++++
 
 This control byte is sent with `USBCtrlTrans()`, using command ID 34.
 
@@ -176,7 +183,7 @@ Summary table
 +---------+-----+-----+-----+-----+-----+-----+-----+-----+
 | Bit     |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  |
 +---------+-----+-----+-----+-----+-----+-----+-----+-----+
-| Meaning |  ?  |  ?  |  ?  |  ?  |  ?  |    VR1    |  ?  |
+| Meaning |  ?  |  ?  |  ?  |  ?  |  ?  |    VS1    |  ?  |
 +---------+-----+-----+-----+-----+-----+-----+-----+-----+
 
 
