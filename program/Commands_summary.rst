@@ -60,3 +60,45 @@ USBCtrlTrans
 +-----+------------------------------------------------------------------------+
 | 148 | Oscilloscope - Send Control byte 0                                     |
 +-----+------------------------------------------------------------------------+
+| 231 | Oscilloscope - Set trigger source                                      |
+|     |   - 0: Use internal trigger (CH1 or CH2)                               |
+|     |   - 1: Use external trigger port (EXT)                                 |
++-----+------------------------------------------------------------------------+
+
+
+
+
+
+SetTrigInfo
++++++++++++
+
+Argument #1 : TrigSourceChan
+
++-------+-------------------------+
+| Value | Meaning                 |
++-------+-------------------------+
+|     0 | Use CH1 as the trigger  |
+|     1 | Use CH2 as the trigger  |
+|     2 | Use an external trigger |
++-------+-------------------------+
+
+
+Argument #2 : TrigMode
+
++-------+--------------------------+
+| Value | Meaning                  |
++-------+--------------------------+
+|     0 | No (internal) triggering |
+|     1 | Regular trigger          |
+|     2 | Single trigger           |
++-------+--------------------------+
+
+
+Argument #3 : TrigEdgeFlag
+
++-------+-----------------------------------------+
+| Value | Meaning                                 |
++-------+-----------------------------------------+
+|     1 | Trigger is activated by a rising edge   |
+|     2 | Trigger is activated by a falling edge  |
++-------+-----------------------------------------+
