@@ -65,6 +65,7 @@ Secondary (not exported)
 | FMT     | unknown_10005890          |
 | ????    | unknown_10005a26          |
 | ????    | unknown_10005a85          |
+| RE_OK   | CorExitProcess            |
 | ????    | unknown_10007080          |
 | ????    | unknown_10007ea0          |
 | ????    | unknown_10008210          |

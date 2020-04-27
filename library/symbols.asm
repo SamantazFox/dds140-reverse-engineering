@@ -80,6 +80,8 @@
 
 [5890]  [unk]  unknown_10005890
 
+[5a4a]  [fun]  CorExitProcess
+
 ;[5a70]  [unk]  unknown_10005a70
 ;[5a85]  [unk]  unknown_10005a85
 ;[5a8e]  [unk]  unknown_10005a8e
@@ -210,3 +212,7 @@
 [d130]  [ptr]  WinUsb_Initialize
 [d134]  [ptr]  WinUsb_Free
 [d138]  [ptr]  WinUsb_ResetPipe
+
+
+; MSCorEE.dll
+[d240]  [str]  CorExitProcess

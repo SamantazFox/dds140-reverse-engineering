@@ -182,19 +182,10 @@
 1000d23a:	33 32                	xor    esi,DWORD PTR [edx]
 1000d23c:	00 00                	add    BYTE PTR [eax],al
 1000d23e:	00 00                	add    BYTE PTR [eax],al
-1000d240:	43                   	inc    ebx
-1000d241:	6f                   	outs   dx,DWORD PTR ds:[esi]
-1000d242:	72 45                	jb     0x1000d289
-1000d244:	78 69                	js     0x1000d2af
-1000d246:	74 50                	je     0x1000d298
-1000d248:	72 6f                	jb     0x1000d2b9
-1000d24a:	63 65 73             	arpl   WORD PTR [ebp+0x73],sp
-1000d24d:	73 00                	jae    0x1000d24f
-1000d24f:	00 6d 73             	add    BYTE PTR [ebp+0x73],ch
-1000d252:	63 6f 72             	arpl   WORD PTR [edi+0x72],bp
-1000d255:	65 65 2e 64 6c       	gs gs cs fs ins BYTE PTR es:[edi],dx
-1000d25a:	6c                   	ins    BYTE PTR es:[edi],dx
-1000d25b:	00 72 75             	add    BYTE PTR [edx+0x75],dh
+1000d240:	43 6f 72 45 78 69 74 50 72 6f 63 65 73 73 00            ; "CorExitProcess"
+1000d24f:	00
+1000d250:	6d 73 63 6f 72 65 65 2e 64 6c 6c 00                     ; "mscoree.dll"
+1000d25c:	72 75             	add    BYTE PTR [edx+0x75],dh
 1000d25e:	6e                   	outs   dx,BYTE PTR ds:[esi]
 1000d25f:	74 69                	je     0x1000d2ca
 1000d261:	6d                   	ins    DWORD PTR es:[edi],dx
