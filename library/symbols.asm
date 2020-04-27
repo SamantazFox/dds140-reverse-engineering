@@ -75,8 +75,8 @@
 
 [5545]  [unk]  unknown_10005545
 
-[5828]  [unk]  unknown_10005828
-[586d]  [unk]  unknown_1000586d
+[5828]  [in-]  EH_prolog
+[586d]  [in-]  EH_epilog
 
 [5890]  [unk]  unknown_10005890
 

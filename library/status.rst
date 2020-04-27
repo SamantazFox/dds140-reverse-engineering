@@ -60,8 +60,8 @@ Secondary (not exported)
 | ????    | unknown_1000397b          |
 | FMT     | unknown_10003a09          |
 | FMT     | unknown_10003a58          |
-| WIP     | unknown_10005828          |
-| FMT     | unknown_1000586d          |
+| WIP     | EH_prolog                 |
+| WIP     | EH_epilog                 |
 | FMT     | unknown_10005890          |
 | ????    | unknown_10005a26          |
 | ????    | unknown_10005a85          |
