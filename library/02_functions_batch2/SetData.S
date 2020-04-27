@@ -6,6 +6,7 @@
 ;    double volt
 ; );
 ;
+;
 ; Lookup table:
 ;
 ; case 0   =>  ds:0x10016038  =>  _global_CH2_FreqValue      // (kHz) => m_refresh[14]
@@ -32,139 +33,207 @@
 
 
 _entry_10002170:
-	mov    eax,DWORD PTR [esp+0x4]          ; store 'index' in eax
+	mov    eax,DWORD PTR [esp+0x4]          ; eax = Arg #1 -> index
+
 	cmp    eax,0x9                          ; redirect to 'default' if 'index' > 9
-	ja     _10002310
+	ja     _default
 
 	jmp    DWORD PTR [eax*4+0x10002314]     ; switch 'index'
 
-_10002184:                                  ; case 0
-	fld    QWORD PTR [esp+0x8]              ;
-	fstp   _global_CH2_FreqValue            ; QWORD* ds:0x10016038
+; 0x10002184
+_case_0
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+	fstp   _global_CH2_FreqValue            ; QWORD PTR ds:0x10016038
 	ret    0xc
 
-_10002191:                                  ; case 1
-	fld    QWORD PTR [esp+0x8]              ;
-	fnstcw WORD PTR [esp+0x4]               ;
-	movzx  eax,WORD PTR [esp+0x4]           ;
-	or     eax,0xc00                        ;
-	mov    DWORD PTR [esp+0x8],eax          ;
-	fldcw  WORD PTR [esp+0x8]               ;
-	fistp  DWORD PTR [esp+0x8]              ;
-	mov    al,BYTE PTR [esp+0x8]            ;
+; 0x10002191
+_case_1
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    al,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
 	mov    _global_CH2_MaxValue,al          ; ds:0x10016040
-	fldcw  WORD PTR [esp+0x4]
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_100021bf:                                  ; case 2
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    cl,BYTE PTR [esp+0x8]
-	mov    _global_CH2_MinValue,cl          ; BYTE* ds:0x10016041
-	fldcw  WORD PTR [esp+0x4]
+; 0x100021bf
+_case_2
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    cl,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
+	mov    _global_CH2_MinValue,cl          ; BYTE PTR ds:0x10016041
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_100021ee:                                  ; case 3
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    dl,BYTE PTR [esp+0x8]
-	mov    _global_CH2_PPValue,dl           ; BYTE* ds:0x10016042
-	fldcw  WORD PTR [esp+0x4]
+; 0x100021ee
+_case_3
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    dl,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
+	mov    _global_CH2_PPValue,dl           ; BYTE PTR ds:0x10016042
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_1000221d:                                  ; case 4
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    al,BYTE PTR [esp+0x8]
+; 0x1000221d
+_case_4
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    al,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
 	mov    _global_CH2_AverageValue,al      ; ds:0x10016043
-	fldcw  WORD PTR [esp+0x4]
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_1000224b:                                  ; case 5
-	fld    QWORD PTR [esp+0x8]
-	fstp   _global_CH1_FreqValue            ; QWORD* ds:0x10016000
+; 0x1000224b
+_case_5
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+	fstp   _global_CH1_FreqValue            ; QWORD PTR ds:0x10016000
 	ret    0xc
 
-_10002258:                                  ; case 6
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    cl,BYTE PTR [esp+0x8]
-	mov    _global_CH1_MaxValue,cl          ; BYTE* ds:0x10016008
-	fldcw  WORD PTR [esp+0x4]
+; 0x10002258
+_case_6
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    cl,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
+	mov    _global_CH1_MaxValue,cl          ; BYTE PTR ds:0x10016008
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_10002287:                                  ; case 7
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    dl,BYTE PTR [esp+0x8]
-	mov    _global_CH1_MinValue,dl          ; BYTE* ds:0x10016009
-	fldcw  WORD PTR [esp+0x4]
+; 0x10002287
+_case_7
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    dl,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
+	mov    _global_CH1_MinValue,dl          ; BYTE PTR ds:0x10016009
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_100022b6:                                  ; case 8
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    al,BYTE PTR [esp+0x8]
+; 0x100022b6
+_case_8
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
+
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    al,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
 	mov    _global_CH1_PPValue,al           ; ds:0x1001600a
-	fldcw  WORD PTR [esp+0x4]
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
 	ret    0xc
 
-_100022e4:                                  ; case 9
-	fld    QWORD PTR [esp+0x8]
-	fnstcw WORD PTR [esp+0x4]
-	movzx  eax,WORD PTR [esp+0x4]
-	or     eax,0xc00
-	mov    DWORD PTR [esp+0x8],eax
-	fldcw  WORD PTR [esp+0x8]
-	fistp  DWORD PTR [esp+0x8]
-	mov    cl,BYTE PTR [esp+0x8]
-	mov    _global_CH1_AverageValue,cl      ; BYTE* ds:0x1001600b
-	fldcw  WORD PTR [esp+0x4]
+; 0x100022e4
+_case_9
+	fld    QWORD PTR [esp+0x8]              ; Load Arg #2 -> volt in to the FPU
 
-_10002310:                                  ; default
+	; FPU control word shenanigans
+	fnstcw WORD PTR [esp+0x4]               ; Use Arg #1 as a temporary variable to store the FPU CW
+	movzx  eax,WORD PTR [esp+0x4]           ; eax = zeroExtend( FPU control word )
+	or     eax,0xc00                        ; Set (temporary) FPU control word bits 8 and 9
+	                                        ;  These bits are the Precision Control Field (PC)
+	                                        ;  Setting these to 11b enables double precision (64b) computation
+	mov    DWORD PTR [esp+0x8],eax          ; Use Arg #2 as a temporary variable
+	fldcw  WORD PTR [esp+0x8]               ; Load the modified FPU control word
+
+	; Store the data given by user
+	fistp  DWORD PTR [esp+0x8]              ; Restore Arg #2 -> volt back from the FPU
+	mov    cl,BYTE PTR [esp+0x8]            ; Only store the lower 8bits in global variable (wut?)
+	mov    _global_CH1_AverageValue,cl      ; BYTE PTR ds:0x1001600b
+
+	fldcw  WORD PTR [esp+0x4]               ; Restore the original FPU control word
+
+; 0x10002310
+_default
 	ret    0xc
 	nop
 
 
 
 
-10002314:	84 21 00 10  ; goto _10002184
-10002318:	91 21 00 10  ; goto _10002191
-1000231c:	bf 21 00 10  ; goto _100021bf
-10002320:	ee 21 00 10  ; goto _100021ee
-10002324:	1d 22 00 10  ; goto _1000221d
-10002328:	4b 22 00 10  ; goto _1000224b
-1000232c:	58 22 00 10  ; goto _10002258
-10002330:	87 22 00 10  ; goto _10002287
-10002334:	b6 22 00 10  ; goto _100022b6
-10002338:	e4 22 00 10  ; goto _100022e4
+10002314:	84 21 00 10  ; goto _case_0 (0x10002184)
+10002318:	91 21 00 10  ; goto _case_1 (0x10002191)
+1000231c:	bf 21 00 10  ; goto _case_2 (0x100021bf)
+10002320:	ee 21 00 10  ; goto _case_3 (0x100021ee)
+10002324:	1d 22 00 10  ; goto _case_4 (0x1000221d)
+10002328:	4b 22 00 10  ; goto _case_5 (0x1000224b)
+1000232c:	58 22 00 10  ; goto _case_6 (0x10002258)
+10002330:	87 22 00 10  ; goto _case_7 (0x10002287)
+10002334:	b6 22 00 10  ; goto _case_8 (0x100022b6)
+10002338:	e4 22 00 10  ; goto _case_9 (0x100022e4)

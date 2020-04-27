@@ -30,11 +30,11 @@ Primary (exported functions)
 | RE_OK   | GetBuffer4Wr         |
 | RE_OK   | GetData              |
 | DONE    | GetHWbufferSize      |
-| FMT     | GetInfoByte          |
+| RE_OK   | GetInfoByte          |
 | FMT     | GetInfodouble        |
 | RE_OK   | GetRawData4Read      |
 | RE_OK   | ResetPipe            |
-| WIP     | SetData              |
+| RE_OK   | SetData              |
 | TODO    | SetInfo              |
 | RE_OK   | SetReadEnableOrNot   |
 | RE_OK   | SetStableEnableOrNot |
