@@ -2070,35 +2070,20 @@
 1000e50f:	00 d4                	add    ah,dl
 1000e511:	ff                   	(bad)  
 1000e512:	ff                   	(bad)  
-1000e513:	ff 00                	inc    DWORD PTR [eax]
-1000e515:	00 00                	add    BYTE PTR [eax],al
-1000e517:	00 fe                	add    dh,bh
-1000e519:	ff                   	(bad)  
-1000e51a:	ff                   	(bad)  
-1000e51b:	ff 00                	inc    DWORD PTR [eax]
-1000e51d:	00 00                	add    BYTE PTR [eax],al
-1000e51f:	00 64 7a 00          	add    BYTE PTR [edx+edi*2+0x0],ah
-1000e523:	10 00                	adc    BYTE PTR [eax],al
-1000e525:	00 00                	add    BYTE PTR [eax],al
-1000e527:	00 fe                	add    dh,bh
-1000e529:	ff                   	(bad)  
-1000e52a:	ff                   	(bad)  
-1000e52b:	ff 00                	inc    DWORD PTR [eax]
-1000e52d:	00 00                	add    BYTE PTR [eax],al
-1000e52f:	00 d4                	add    ah,dl
-1000e531:	ff                   	(bad)  
-1000e532:	ff                   	(bad)  
-1000e533:	ff 00                	inc    DWORD PTR [eax]
-1000e535:	00 00                	add    BYTE PTR [eax],al
-1000e537:	00 fe                	add    dh,bh
-1000e539:	ff                   	(bad)  
-1000e53a:	ff                   	(bad)  
-1000e53b:	ff 1f                	call   FWORD PTR [edi]
-1000e53d:	87 00                	xchg   DWORD PTR [eax],eax
-1000e53f:	10 3b                	adc    BYTE PTR [ebx],bh
-1000e541:	87 00                	xchg   DWORD PTR [eax],eax
-1000e543:	10 00                	adc    BYTE PTR [eax],al
-1000e545:	00 00                	add    BYTE PTR [eax],al
+1000e513:	ff
+1000e514:	00 00 00 00
+1000e518:	fe ff ff ff
+1000e51c:	00 00 00 00
+1000e520:	64 7a 00 10
+1000e524:	00 00 00 00
+1000e528:	fe ff ff ff
+1000e52c:	00 00 00 00
+1000e530:	d4 ff ff ff
+1000e534:	00 00 00 00
+1000e538:	fe ff ff ff
+1000e53c:	1f 87 00 10
+1000e540:	3b 87 00 10
+1000e544:	00 00 00                	add    BYTE PTR [eax],al
 1000e547:	00 fe                	add    dh,bh
 1000e549:	ff                   	(bad)  
 1000e54a:	ff                   	(bad)  

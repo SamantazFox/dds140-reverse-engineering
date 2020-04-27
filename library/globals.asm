@@ -31,6 +31,7 @@ ds:0x10011004    ; _global_PipeID
 ds:0x10015210    ; _global_InterfaceHandle
 ds:0x1001522c    ; _global_1001522c (initialization flag?)
 
+ds:0x10015df8    ; _global_cpu_sopports_SSE2
 
 ds:0x10016000    ; [8] / _global_CH1_FreqValue     (kHz)
 ds:0x10016008    ; [1] / _global_CH1_MaxValue      (V)

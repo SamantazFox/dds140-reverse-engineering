@@ -72,7 +72,9 @@ Secondary (not exported)
 | ????    | unknown_10008510          |
 | ????    | unknown_100085f0          |
 | ????    | unknown_10008670          |
-| ????    | unknown_10008670_bis      |
+| WIP     | test_SSE2_support         |
+| WIP     | has_SSE2_support          |
+| RE_OK   | save_SSE2_test_result     |
 | ????    | unknown_100088a0          |
 | ????    | unknown_100088a0          |
 | ????    | unknown_10008a00          |

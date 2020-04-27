@@ -101,6 +101,10 @@
 
 [85f0]  [unk]  unknown_100085f0
 
+[8702]  [fun]  test_SSE2_support
+[8752]  [fun]  has_SSE2_support
+[87b2]  [fun]  save_SSE2_test_result
+
 [9394]  [unk]  unknown_10009394
 
 []  [unk]  unknown_
