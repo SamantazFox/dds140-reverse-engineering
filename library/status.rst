@@ -21,7 +21,7 @@ Primary (exported functions)
 +---------+----------------------+
 | WIP     | AiReadBulkData       |
 | DONE    | BufferInit           |
-| TODO    | DataPreDisposal      |
+| WIP     | DataPreDisposal      |
 | TODO    | DeviceClose          |
 | TODO    | DeviceOpen           |
 | RE_OK   | DllMain              |
@@ -31,7 +31,7 @@ Primary (exported functions)
 | RE_OK   | GetData              |
 | DONE    | GetHWbufferSize      |
 | RE_OK   | GetInfoByte          |
-| FMT     | GetInfodouble        |
+| WIP     | GetInfodouble        |
 | RE_OK   | GetRawData4Read      |
 | RE_OK   | ResetPipe            |
 | RE_OK   | SetData              |

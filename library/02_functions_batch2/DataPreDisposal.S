@@ -25,42 +25,42 @@ _100012df:
 
 ; type != 1
 _100012e8:
-	cmp    DWORD PTR [esp+0x24],esi   ; if count < 1
-	jb     _100012df ; jump
+	cmp    DWORD PTR [esp+0x24],esi         ; if count < 1
+	jb     _100012df                        ; jump
 
+	fld    _global_dataNumPerPixar          ; fp load: QWORD PTR ds:0x10016090
+	fld    _const_512                       ; fp load: QWORD PTR ds:0x1000d188
+	fmul   st,st(1)                         ; _global_dataNumPerPixar * 512.0
+	fld    st(0)                            ; push st(0) on fp stack (duplicate)
+	call   <unknown_100038d0()>             ; 0x100038d0
 
-100012ee:	dd 05 90 60 01 10    	fld    QWORD PTR ds:0x10016090
-100012f4:	dd 05 88 d1 00 10    	fld    QWORD PTR ds:0x1000d188
-100012fa:	d8 c9                	fmul   st,st(1)
-100012fc:	d9 c0                	fld    st(0)
-100012fe:	e8 cd 25 00 00       	call   <unknown_100038d0()> ; 0x100038d0
+	mov    ecx,eax                          ; ecx = result of unknown_100038d0()
+	and    eax,0x80000001                   ; ecx &= 0x80000001
+	jns    _10001311
 
-10001303:	8b c8                	mov    ecx,eax
-10001305:	25 01 00 00 80       	and    eax,0x80000001
-1000130a:	79 05                	jns    _10001311
+	dec    eax
+	or     eax,0xfffffffe
+	inc    eax
 
-1000130c:	48                   	dec    eax
-1000130d:	83 c8 fe             	or     eax,0xfffffffe
-10001310:	40                   	inc    eax
+_10001311:
+	je     _10001315
+	add    ecx,esi
 
-_10001311:	74 02                	je     _10001315
+_10001315:
+	mov    eax,_global_HWbuffer_size        ; ds:0x10016084
+	cdq    
+	sub    eax,edx
+	mov    edx,DWORD PTR [esp+0x20]
+	push   edi
+	mov    edi,ecx
+	sar    eax,1
+	sub    edi,edx
+	cmp    eax,edi
+	jl     _10001333
 
-10001313:	03 ce                	add    ecx,esi
-
-_10001315:	a1 84 60 01 10       	mov    eax,ds:0x10016084
-1000131a:	99                   	cdq    
-1000131b:	2b c2                	sub    eax,edx
-1000131d:	8b 54 24 20          	mov    edx,DWORD PTR [esp+0x20]
-10001321:	57                   	push   edi
-10001322:	8b f9                	mov    edi,ecx
-10001324:	d1 f8                	sar    eax,1
-10001326:	2b fa                	sub    edi,edx
-10001328:	3b c7                	cmp    eax,edi
-1000132a:	7c 07                	jl     _10001333
-
-1000132c:	8d 3c 11             	lea    edi,[ecx+edx*1]
-1000132f:	3b f8                	cmp    edi,eax
-10001331:	7e 0e                	jle    _10001341
+	lea    edi,[ecx+edx*1]
+	cmp    edi,eax
+	jle    _10001341
 
 _10001333:
 	fstp   st(1)
@@ -71,24 +71,28 @@ _10001333:
 	add    esp,0x14
 	ret    0xc
 
-_10001341:	dd 05 a0 d1 00 10    	fld    QWORD PTR ds:0x1000d1a0
-10001347:	2b c1                	sub    eax,ecx
-10001349:	03 05 74 60 01 10    	add    eax,DWORD PTR ds:0x10016074
-1000134f:	d9 e8                	fld1   
-10001351:	dd 05 98 d1 00 10    	fld    QWORD PTR ds:0x1000d198
-10001357:	53                   	push   ebx
-10001358:	03 05 88 60 01 10    	add    eax,DWORD PTR ds:0x10016088
-1000135e:	d9 ee                	fldz   
-10001360:	8a 1d 8c 60 01 10    	mov    bl,BYTE PTR ds:0x1001608c
+	fld    _const_400                           ; QWORD PTR ds:0x1000d1a0
+	sub    eax,ecx
+	add    eax,_global_BufferOffset             ; DWORD PTR ds:0x10016074
+	fld1   
+
+	fld    _const_2                             ; QWORD PTR ds:0x1000d198
+	push   ebx
+	add    eax,_global_HWbuffer_ptr             ; DWORD PTR ds:0x10016088
+	fldz   
+
+10001360:	8a 1d 8c 60 01 10    	mov    bl,_global_ChannelMask               ; BYTE PTR ds:0x1001608c
 10001366:	03 c2                	add    eax,edx
-10001368:	8a d3                	mov    dl,bl
-1000136a:	80 e2 11             	and    dl,0x11
-1000136d:	80 fa 11             	cmp    dl,0x11
-10001370:	55                   	push   ebp
+
+10001368:	8a d3                	mov    dl,bl                         ; dl = bl
+	and    dl,0x11                          ; clear all bits, except 0 and 4
+	cmp    dl,0x11                          ; are bits 0 and 4 set?
+
+	push   ebp                              ;
 10001371:	8b c8                	mov    ecx,eax
 10001373:	0f 85 f7 03 00 00    	jne    _10001770
 
-10001379:	dd 05 90 d1 00 10    	fld    QWORD PTR ds:0x1000d190
+10001379:	dd 05 90 d1 00 10    	fld    _const_4                             ; QWORD PTR ds:0x1000d190
 1000137f:	d8 de                	fcomp  st(6)
 10001381:	df e0                	fnstsw ax
 10001383:	f6 c4 05             	test   ah,0x5
@@ -106,7 +110,7 @@ _10001396:	8b c5                	mov    eax,ebp
 1000139e:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 100013a2:	7d 06                	jge    _100013aa
 
-100013a4:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100013a4:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100013aa:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 100013ae:	32 db                	xor    bl,bl
@@ -133,7 +137,7 @@ _100013aa:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 100013f3:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 100013f7:	7d 06                	jge    _100013ff
 
-100013f9:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100013f9:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100013ff:	d8 c5                	fadd   st,st(5)
 10001401:	8b c6                	mov    eax,esi
@@ -144,7 +148,7 @@ _100013ff:	d8 c5                	fadd   st,st(5)
 1000140d:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001411:	7d 06                	jge    _10001419
 
-10001413:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001413:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001419:	d8 d9                	fcomp  st(1)
 1000141b:	df e0                	fnstsw ax
@@ -189,7 +193,7 @@ _10001471:	83 c6 01             	add    esi,0x1
 1000147c:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001480:	7d 06                	jge    _10001488
 
-10001482:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001482:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001488:	d8 d9                	fcomp  st(1)
 1000148a:	df e0                	fnstsw ax
@@ -204,7 +208,7 @@ _10001497:	8b c7                	mov    eax,edi
 1000149f:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 100014a3:	7d 06                	jge    _100014ab
 
-100014a5:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100014a5:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100014ab:	d8 c5                	fadd   st,st(5)
 100014ad:	8b d6                	mov    edx,esi
@@ -215,7 +219,7 @@ _100014ab:	d8 c5                	fadd   st,st(5)
 100014b9:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 100014bd:	7d 06                	jge    _100014c5
 
-100014bf:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100014bf:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100014c5:	d8 d9                	fcomp  st(1)
 100014c7:	df e0                	fnstsw ax
@@ -240,7 +244,7 @@ _100014e1:	83 c6 01             	add    esi,0x1
 100014ec:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 100014f0:	7d 06                	jge    _100014f8
 
-100014f2:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100014f2:	dc 05 80 d1 00 10    	fadd   _const_pow2_32                       ; QWORD PTR ds:0x1000d180
 
 _100014f8:	d8 d9                	fcomp  st(1)
 100014fa:	df e0                	fnstsw ax
@@ -269,7 +273,7 @@ _10001501:	0f b6 44 24 28       	movzx  eax,BYTE PTR [esp+0x28]
 10001551:	0f b6 00             	movzx  eax,BYTE PTR [eax]
 10001554:	88 04 ad 13 10 01 10 	mov    BYTE PTR [ebp*4+0x10011013],al
 1000155b:	c6 44 24 28 ff       	mov    BYTE PTR [esp+0x28],0xff
-10001560:	dd 05 a0 d1 00 10    	fld    QWORD PTR ds:0x1000d1a0
+10001560:	dd 05 a0 d1 00 10    	fld    _const_400                           ; QWORD PTR ds:0x1000d1a0
 10001566:	d8 d6                	fcom   st(6)
 10001568:	df e0                	fnstsw ax
 1000156a:	f6 c4 05             	test   ah,0x5
@@ -283,7 +287,7 @@ _10001501:	0f b6 44 24 28       	movzx  eax,BYTE PTR [esp+0x28]
 10001582:	89 54 24 18          	mov    DWORD PTR [esp+0x18],edx
 10001586:	7d 06                	jge    _1000158e
 
-10001588:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001588:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _1000158e:	d8 da                	fcomp  st(2)
 10001590:	df e0                	fnstsw ax
@@ -339,7 +343,7 @@ _100015ef:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
 10001603:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
 10001607:	7d 06                	jge    _1000160f
 
-10001609:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001609:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _1000160f:	d8 da                	fcomp  st(2)
 10001611:	df e0                	fnstsw ax
@@ -354,7 +358,7 @@ _1000161a:	8d 77 01             	lea    esi,[edi+0x1]
 10001625:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001629:	7d 06                	jge    _10001631
 
-1000162b:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+1000162b:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001631:	d8 da                	fcomp  st(2)
 10001633:	df e0                	fnstsw ax
@@ -380,7 +384,7 @@ _10001650:	83 c6 01             	add    esi,0x1
 1000165e:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001662:	7d 06                	jge    _1000166a
 
-10001664:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001664:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _1000166a:	d8 da                	fcomp  st(2)
 1000166c:	df e0                	fnstsw ax
@@ -426,7 +430,7 @@ _100016d7:	0f b6 04 51          	movzx  eax,BYTE PTR [ecx+edx*2]
 100016f6:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 100016fa:	7d 06                	jge    _10001702
 
-100016fc:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100016fc:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001702:	d8 d9                	fcomp  st(1)
 10001704:	df e0                	fnstsw ax
@@ -460,14 +464,14 @@ _10001746:	0f b6 16             	movzx  edx,BYTE PTR [esi]
 10001761:	3d 00 10 00 00       	cmp    eax,0x1000
 10001766:	72 de                	jb     _10001746
 
-_10001768:	dd 05 a0 d1 00 10    	fld    QWORD PTR ds:0x1000d1a0
+_10001768:	dd 05 a0 d1 00 10    	fld    _const_400                           ; QWORD PTR ds:0x1000d1a0
 _1000176e:	d9 cb                	fxch   st(3)
 
 _10001770:	84 db                	test   bl,bl
 10001772:	0f 89 e9 02 00 00    	jns    _10001a61
 
 10001778:	dd db                	fstp   st(3)
-1000177a:	dd 05 90 d1 00 10    	fld    QWORD PTR ds:0x1000d190
+1000177a:	dd 05 90 d1 00 10    	fld    _const_4                             ; QWORD PTR ds:0x1000d190
 10001780:	d8 dd                	fcomp  st(5)
 10001782:	df e0                	fnstsw ax
 10001784:	f6 c4 05             	test   ah,0x5
@@ -484,7 +488,7 @@ _10001795:	8b c5                	mov    eax,ebp
 1000179d:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 100017a1:	7d 06                	jge    _100017a9
 
-100017a3:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100017a3:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100017a9:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 100017ad:	32 d2                	xor    dl,dl
@@ -505,7 +509,7 @@ _100017a9:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 100017e1:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 100017e5:	7d 06                	jge    _100017ed
 
-100017e7:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100017e7:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100017ed:	d8 c2                	fadd   st,st(2)
 100017ef:	8b c7                	mov    eax,edi
@@ -516,7 +520,7 @@ _100017ed:	d8 c2                	fadd   st,st(2)
 100017fb:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 100017ff:	7d 06                	jge    _10001807
 
-10001801:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001801:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001807:	d8 d9                	fcomp  st(1)
 10001809:	df e0                	fnstsw ax
@@ -541,7 +545,7 @@ _10001823:	83 c7 01             	add    edi,0x1
 1000182e:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001832:	7d 06                	jge    _1000183a
 
-10001834:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001834:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _1000183a:	d8 d9                	fcomp  st(1)
 1000183c:	df e0                	fnstsw ax
@@ -575,7 +579,7 @@ _10001843:	8a 04 59             	mov    al,BYTE PTR [ecx+ebx*2]
 100018aa:	db 44 24 2c          	fild   DWORD PTR [esp+0x2c]
 100018ae:	7d 06                	jge    _100018b6
 
-100018b0:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100018b0:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100018b6:	d8 d9                	fcomp  st(1)
 100018b8:	df e0                	fnstsw ax
@@ -603,7 +607,7 @@ _100018d9:	83 c6 01             	add    esi,0x1
 100018e7:	db 44 24 2c          	fild   DWORD PTR [esp+0x2c]
 100018eb:	7d 06                	jge    _100018f3
 
-100018ed:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100018ed:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100018f3:	d8 d9                	fcomp  st(1)
 100018f5:	df e0                	fnstsw ax
@@ -612,7 +616,7 @@ _100018f3:	d8 d9                	fcomp  st(1)
 
 _100018fc:	8a 5c 59 01          	mov    bl,BYTE PTR [ecx+ebx*2+0x1]
 10001900:	dd d8                	fstp   st(0)
-10001902:	a1 44 60 01 10       	mov    eax,ds:0x10016044
+10001902:	a1 44 60 01 10       	mov    eax,_global_ZrroUniInt    ; ds:0x10016044
 10001907:	0f b6 d3             	movzx  edx,bl
 1000190a:	03 d0                	add    edx,eax
 1000190c:	79 04                	jns    _10001912
@@ -680,7 +684,7 @@ _1000198c:	dd dc                	fstp   st(4)
 100019a1:	75 4a                	jne    _100019ed
 
 100019a3:	8d 71 01             	lea    esi,[ecx+0x1]
-100019a6:	8b 0d 44 60 01 10    	mov    ecx,DWORD PTR ds:0x10016044
+100019a6:	8b 0d 44 60 01 10    	mov    ecx,_global_ZrroUniInt                   ; DWORD PTR ds:0x10016044
 
 _100019ac:	8a 46 ff             	mov    al,BYTE PTR [esi-0x1]
 100019af:	88 82 10 10 01 10    	mov    BYTE PTR [edx+0x10011010],al
@@ -703,7 +707,7 @@ _100019c4:	88 82 10 32 01 10    	mov    BYTE PTR [edx+0x10013210],al
 100019d8:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 100019dc:	7d 06                	jge    _100019e4
 
-100019de:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+100019de:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _100019e4:	d8 d9                	fcomp  st(1)
 100019e6:	df e0                	fnstsw ax
@@ -720,7 +724,7 @@ _100019ed:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001a09:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
 10001a0d:	3d 00 10 00 00       	cmp    eax,0x1000
 10001a12:	d9 6c 24 28          	fldcw  WORD PTR [esp+0x28]
-10001a16:	0f 83 b4 05 00 00    	jae    _10001fd0
+10001a16:	0f 83 b4 05 00 00    	jae    _exit                                ; 0x10001fd0
 
 10001a1c:	8b c8                	mov    ecx,eax
 10001a1e:	2b c8                	sub    ecx,eax
@@ -749,7 +753,7 @@ _10001a30:	0f b6 11             	movzx  edx,BYTE PTR [ecx]
 _10001a61:	80 fb 10             	cmp    bl,0x10
 10001a64:	0f 85 bf 02 00 00    	jne    _10001d29
 
-10001a6a:	dd 05 90 d1 00 10    	fld    QWORD PTR ds:0x1000d190
+10001a6a:	dd 05 90 d1 00 10    	fld    _const_4                             ; QWORD PTR ds:0x1000d190
 10001a70:	d8 de                	fcomp  st(6)
 10001a72:	df e0                	fnstsw ax
 10001a74:	f6 c4 05             	test   ah,0x5
@@ -767,7 +771,7 @@ _10001a89:	8b c5                	mov    eax,ebp
 10001a91:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 10001a95:	7d 06                	jge    _10001a9d
 
-10001a97:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001a97:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001a9d:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001aa1:	32 db                	xor    bl,bl
@@ -794,7 +798,7 @@ _10001a9d:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001aea:	89 54 24 18          	mov    DWORD PTR [esp+0x18],edx
 10001aee:	7d 06                	jge    _10001af6
 
-10001af0:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001af0:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001af6:	d8 c3                	fadd   st,st(3)
 10001af8:	8b c2                	mov    eax,edx
@@ -805,7 +809,7 @@ _10001af6:	d8 c3                	fadd   st,st(3)
 10001b04:	db 44 24 1c          	fild   DWORD PTR [esp+0x1c]
 10001b08:	7d 06                	jge    _10001b10
 
-10001b0a:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001b0a:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001b10:	d8 d9                	fcomp  st(1)
 10001b12:	df e0                	fnstsw ax
@@ -861,7 +865,7 @@ _10001b71:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
 10001b85:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
 10001b89:	7d 06                	jge    _10001b91
 
-10001b8b:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001b8b:	dc 05 80 d1 00 10    	fadd   _const_pow2_32                       ; QWORD PTR ds:0x1000d180
 
 _10001b91:	d8 d9                	fcomp  st(1)
 10001b93:	df e0                	fnstsw ax
@@ -875,7 +879,7 @@ _10001b9c:	85 ff                	test   edi,edi
 10001ba6:	8d 77 01             	lea    esi,[edi+0x1]
 10001ba9:	7d 06                	jge    _10001bb1
 
-10001bab:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001bab:	dc 05 80 d1 00 10    	fadd   _const_pow2_32                       ; QWORD PTR ds:0x1000d180
 
 _10001bb1:	d8 c3                	fadd   st,st(3)
 10001bb3:	8b d6                	mov    edx,esi
@@ -886,7 +890,7 @@ _10001bb1:	d8 c3                	fadd   st,st(3)
 10001bbf:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001bc3:	7d 06                	jge    _10001bcb
 
-10001bc5:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001bc5:	dc 05 80 d1 00 10    	fadd   _const_pow2_32                       ; QWORD PTR ds:0x1000d180
 
 _10001bcb:	d8 d9                	fcomp  st(1)
 10001bcd:	df e0                	fnstsw ax
@@ -914,7 +918,7 @@ _10001bea:	83 c6 01             	add    esi,0x1
 10001bf8:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
 10001bfc:	7d 06                	jge    _10001c04
 
-10001bfe:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001bfe:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001c04:	d8 d9                	fcomp  st(1)
 10001c06:	df e0                	fnstsw ax                       ; ax = x87 FPU's status word
@@ -964,9 +968,11 @@ _10001c87:	dd dd                	fstp   st(5)
 10001c95:	df e0                	fnstsw ax
 10001c97:	dd da                	fstp   st(2)
 10001c99:	f6 c4 41             	test   ah,0x41
-10001c9c:	75 2e                	jne    0x10001ccc
+10001c9c:	75 2e                	jne    _10001ccc
+
 10001c9e:	83 c1 01             	add    ecx,0x1
-10001ca1:	8a 01                	mov    al,BYTE PTR [ecx]
+
+_10001ca1:	8a 01                	mov    al,BYTE PTR [ecx]
 10001ca3:	88 82 10 32 01 10    	mov    BYTE PTR [edx+0x10013210],al
 10001ca9:	83 c2 01             	add    edx,0x1
 10001cac:	8b c2                	mov    eax,edx
@@ -974,13 +980,16 @@ _10001c87:	dd dd                	fstp   st(5)
 10001cb1:	85 c0                	test   eax,eax
 10001cb3:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
 10001cb7:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
-10001cbb:	7d 06                	jge    0x10001cc3
-10001cbd:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001cc3:	d8 da                	fcomp  st(2)
+10001cbb:	7d 06                	jge    _10001cc3
+
+10001cbd:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+
+_10001cc3:	d8 da                	fcomp  st(2)
 10001cc5:	df e0                	fnstsw ax
 10001cc7:	f6 c4 05             	test   ah,0x5
-10001cca:	7b d5                	jnp    0x10001ca1
-10001ccc:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
+10001cca:	7b d5                	jnp    _10001ca1
+
+_10001ccc:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001cd0:	0f b7 44 24 28       	movzx  eax,WORD PTR [esp+0x28]
 10001cd5:	dd d9                	fstp   st(1)
 10001cd7:	0d 00 0c 00 00       	or     eax,0xc00
@@ -990,7 +999,7 @@ _10001c87:	dd dd                	fstp   st(5)
 10001ce8:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
 10001cec:	3d 00 10 00 00       	cmp    eax,0x1000
 10001cf1:	d9 6c 24 28          	fldcw  WORD PTR [esp+0x28]
-10001cf5:	0f 83 d5 02 00 00    	jae    _10001fd0
+10001cf5:	0f 83 d5 02 00 00    	jae    _exit                                ; 0x10001fd0
 
 10001cfb:	8b c8                	mov    ecx,eax
 10001cfd:	2b c8                	sub    ecx,eax
@@ -1003,21 +1012,21 @@ _10001d05:	8a 11                	mov    dl,BYTE PTR [ecx]
 10001d13:	3d 00 10 00 00       	cmp    eax,0x1000
 10001d18:	72 eb                	jb     _10001d05
 
-10001d1a:	5d                   	pop    ebp                 ; Restore all registers
+10001d1a:	5d                   	pop    ebp                                  ; Restore all registers
 10001d1b:	5b                   	pop    ebx
 10001d1c:	5f                   	pop    edi
-10001d1d:	b8 01 00 00 00       	mov    eax,0x1             ; eax = 1
+10001d1d:	b8 01 00 00 00       	mov    eax,0x1                              ; eax = 1
 10001d22:	5e                   	pop    esi
 10001d23:	83 c4 14             	add    esp,0x14
-10001d26:	c2 0c 00             	ret    0xc                 ; return eax
+10001d26:	c2 0c 00             	ret    0xc                                  ; return eax
 
 _10001d29:	80 fb 01             	cmp    bl,0x1
-10001d2c:	0f 85 92 02 00 00    	jne    0x10001fc4
-10001d32:	dd 05 90 d1 00 10    	fld    QWORD PTR ds:0x1000d190
+10001d2c:	0f 85 92 02 00 00    	jne    _save_fp_stack_and_exit              ; 0x10001fc4
+10001d32:	dd 05 90 d1 00 10    	fld    _const_4                             ; QWORD PTR ds:0x1000d190
 10001d38:	d8 de                	fcomp  st(6)
 10001d3a:	df e0                	fnstsw ax
 10001d3c:	f6 c4 05             	test   ah,0x5
-10001d3f:	0f 8a e1 01 00 00    	jp     0x10001f26
+10001d3f:	0f 8a e1 01 00 00    	jp     _10001f26
 10001d45:	dd dc                	fstp   st(4)
 10001d47:	33 ff                	xor    edi,edi
 10001d49:	dd d8                	fstp   st(0)
@@ -1032,7 +1041,7 @@ _10001d4d:	8b c7                	mov    eax,edi
 10001d51:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
 10001d55:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 10001d59:	7d 06                	jge    _10001d61
-10001d5b:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001d5b:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001d61:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001d65:	32 db                	xor    bl,bl
@@ -1055,18 +1064,18 @@ _10001d61:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001da2:	85 d2                	test   edx,edx
 10001da4:	89 54 24 30          	mov    DWORD PTR [esp+0x30],edx
 10001da8:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
-10001dac:	7d 06                	jge    0x10001db4
-10001dae:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001db4:	d8 c3                	fadd   st,st(3)
+10001dac:	7d 06                	jge    _10001db4
+10001dae:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+_10001db4:	d8 c3                	fadd   st,st(3)
 10001db6:	8b c6                	mov    eax,esi
 10001db8:	85 c0                	test   eax,eax
 10001dba:	89 44 24 30          	mov    DWORD PTR [esp+0x30],eax
 10001dbe:	d8 e2                	fsub   st,st(2)
 10001dc0:	d9 c0                	fld    st(0)
 10001dc2:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
-10001dc6:	7d 06                	jge    0x10001dce
-10001dc8:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001dce:	d8 d9                	fcomp  st(1)
+10001dc6:	7d 06                	jge    _10001dce
+10001dc8:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+_10001dce:	d8 d9                	fcomp  st(1)
 10001dd0:	df e0                	fnstsw ax
 10001dd2:	f6 c4 05             	test   ah,0x5
 10001dd5:	0f 8a db 00 00 00    	jp     _10001eb6
@@ -1088,12 +1097,12 @@ _10001dfb:	8a 04 71             	mov    al,BYTE PTR [ecx+esi*2]
 10001e03:	0f b6 d0             	movzx  edx,al
 10001e06:	83 c2 05             	add    edx,0x5
 10001e09:	3b ea                	cmp    ebp,edx
-10001e0b:	7e 09                	jle    0x10001e16
+10001e0b:	7e 09                	jle    _10001e16
 10001e0d:	0f b6 6c 71 02       	movzx  ebp,BYTE PTR [ecx+esi*2+0x2]
 10001e12:	3b ea                	cmp    ebp,edx
 10001e14:	7f 10                	jg     _10001e26
 
-10001e16:	3a c3                	cmp    al,bl
+_10001e16:	3a c3                	cmp    al,bl
 10001e18:	76 02                	jbe    _10001e1c
 
 10001e1a:	8a d8                	mov    bl,al
@@ -1110,9 +1119,9 @@ _10001e2a:	83 c6 01             	add    esi,0x1
 10001e2f:	85 d2                	test   edx,edx
 10001e31:	89 54 24 30          	mov    DWORD PTR [esp+0x30],edx
 10001e35:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
-10001e39:	7d 06                	jge    0x10001e41
-10001e3b:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001e41:	d8 d9                	fcomp  st(1)
+10001e39:	7d 06                	jge    _10001e41
+10001e3b:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+_10001e41:	d8 d9                	fcomp  st(1)
 10001e43:	df e0                	fnstsw ax
 10001e45:	f6 c4 05             	test   ah,0x5
 10001e48:	7b 91                	jnp    _10001ddb
@@ -1122,39 +1131,39 @@ _10001e4c:	8b c5                	mov    eax,ebp
 10001e4e:	85 c0                	test   eax,eax
 10001e50:	89 44 24 30          	mov    DWORD PTR [esp+0x30],eax
 10001e54:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
-10001e58:	7d 06                	jge    0x10001e60
-10001e5a:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001e60:	d8 c3                	fadd   st,st(3)
+10001e58:	7d 06                	jge    _10001e60
+10001e5a:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+_10001e60:	d8 c3                	fadd   st,st(3)
 10001e62:	8b d6                	mov    edx,esi
 10001e64:	85 d2                	test   edx,edx
 10001e66:	89 54 24 30          	mov    DWORD PTR [esp+0x30],edx
 10001e6a:	d8 e2                	fsub   st,st(2)
 10001e6c:	d9 c0                	fld    st(0)
 10001e6e:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
-10001e72:	7d 06                	jge    0x10001e7a
-10001e74:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001e7a:	d8 d9                	fcomp  st(1)
+10001e72:	7d 06                	jge    _10001e7a
+10001e74:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+_10001e7a:	d8 d9                	fcomp  st(1)
 10001e7c:	df e0                	fnstsw ax
 10001e7e:	f6 c4 05             	test   ah,0x5
 10001e81:	7a 33                	jp     _10001eb6
-10001e83:	8a 04 71             	mov    al,BYTE PTR [ecx+esi*2]
+_10001e83:	8a 04 71             	mov    al,BYTE PTR [ecx+esi*2]
 10001e86:	3a c3                	cmp    al,bl
-10001e88:	76 02                	jbe    0x10001e8c
+10001e88:	76 02                	jbe    _10001e8c
 10001e8a:	8a d8                	mov    bl,al
-10001e8c:	3a 44 24 28          	cmp    al,BYTE PTR [esp+0x28]
-10001e90:	73 04                	jae    0x10001e96
+_10001e8c:	3a 44 24 28          	cmp    al,BYTE PTR [esp+0x28]
+10001e90:	73 04                	jae    _10001e96
 10001e92:	88 44 24 28          	mov    BYTE PTR [esp+0x28],al
-10001e96:	83 c6 01             	add    esi,0x1
+_10001e96:	83 c6 01             	add    esi,0x1
 10001e99:	8b c6                	mov    eax,esi
 10001e9b:	85 c0                	test   eax,eax
 10001e9d:	89 44 24 30          	mov    DWORD PTR [esp+0x30],eax
 10001ea1:	db 44 24 30          	fild   DWORD PTR [esp+0x30]
-10001ea5:	7d 06                	jge    0x10001ead
-10001ea7:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
-10001ead:	d8 d9                	fcomp  st(1)
+10001ea5:	7d 06                	jge    _10001ead
+10001ea7:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
+_10001ead:	d8 d9                	fcomp  st(1)
 10001eaf:	df e0                	fnstsw ax
 10001eb1:	f6 c4 05             	test   ah,0x5
-10001eb4:	7b cd                	jnp    0x10001e83
+10001eb4:	7b cd                	jnp    _10001e83
 
 _10001eb6:	0f b6 44 24 28       	movzx  eax,BYTE PTR [esp+0x28]
 10001ebb:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
@@ -1190,7 +1199,7 @@ _10001eb6:	0f b6 44 24 28       	movzx  eax,BYTE PTR [esp+0x28]
 10001f1f:	5e                   	pop    esi
 10001f20:	83 c4 14             	add    esp,0x14
 10001f23:	c2 0c 00             	ret    0xc
-10001f26:	dd dd                	fstp   st(5)
+_10001f26:	dd dd                	fstp   st(5)
 10001f28:	33 d2                	xor    edx,edx
 10001f2a:	dd d9                	fstp   st(1)
 10001f2c:	dd d9                	fstp   st(1)
@@ -1211,7 +1220,7 @@ _10001f3d:	8a 04 51             	mov    al,BYTE PTR [ecx+edx*2]
 10001f51:	db 44 24 28          	fild   DWORD PTR [esp+0x28]
 10001f55:	7d 06                	jge    _10001f5d
 
-10001f57:	dc 05 80 d1 00 10    	fadd   pow2(32)  ; QWORD* ds:0x1000d180
+10001f57:	dc 05 80 d1 00 10    	fadd   _const_pow2_32  ; QWORD PTR ds:0x1000d180
 
 _10001f5d:	d8 da                	fcomp  st(2)
 10001f5f:	df e0                	fnstsw ax
@@ -1228,7 +1237,7 @@ _10001f66:	d9 7c 24 28          	fnstcw WORD PTR [esp+0x28]
 10001f82:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
 10001f86:	3d 00 10 00 00       	cmp    eax,0x1000
 10001f8b:	d9 6c 24 28          	fldcw  WORD PTR [esp+0x28]
-10001f8f:	73 3f                	jae    _10001fd0
+10001f8f:	73 3f                	jae    _exit                                ; 0x10001fd0
 
 10001f91:	8b c8                	mov    ecx,eax
 10001f93:	2b c8                	sub    ecx,eax
@@ -1251,14 +1260,19 @@ _10001fa0:	8a 11                	mov    dl,BYTE PTR [ecx]
 10001fbd:	5e                   	pop    esi
 10001fbe:	83 c4 14             	add    esp,0x14
 10001fc1:	c2 0c 00             	ret    0xc
-10001fc4:	dd dd                	fstp   st(5)
-10001fc6:	dd d9                	fstp   st(1)
-10001fc8:	dd da                	fstp   st(2)
-10001fca:	dd d9                	fstp   st(1)
-10001fcc:	dd d9                	fstp   st(1)
-10001fce:	dd d8                	fstp   st(0)
 
-_10001fd0:	5d                   	pop    ebp
+; 0x10001fc4
+_save_fp_stack_and_exit:
+	fstp   st(5)
+	fstp   st(1)
+	fstp   st(2)
+	fstp   st(1)
+	fstp   st(1)
+	fstp   st(0)
+
+; 0x10001fd0
+_exit:
+	5d                   	pop    ebp
 10001fd1:	5b                   	pop    ebx
 10001fd2:	5f                   	pop    edi
 10001fd3:	b8 01 00 00 00       	mov    eax,0x1

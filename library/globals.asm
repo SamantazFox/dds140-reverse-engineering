@@ -67,4 +67,6 @@ ds:0x10016088    ; [4] / _global_HWbuffer_ptr
 ds:0x1001608c    ; _global_ChannelMask
 ds:0x10016090    ; _global_dataNumPerPixar
 
+ds:0x10016098    ; __UNKNOWN__
+
 ds:0x1001609c    ; [1] / _global_ReadEnable
