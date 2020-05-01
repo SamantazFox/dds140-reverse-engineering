@@ -57,7 +57,7 @@ Secondary (not exported)
 | ????    | unknown_10003670          |
 | RE_OK   | free_interface            |
 | FMT     | unknown_100038d0          |
-| ????    | unknown_1000397b          |
+| FMT     | unknown_1000397b          |
 | FMT     | unknown_10003a09          |
 | FMT     | unknown_10003a58          |
 | WIP     | EH_prolog                 |
