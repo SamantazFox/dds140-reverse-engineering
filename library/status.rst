@@ -63,7 +63,8 @@ Secondary (not exported)
 | WIP     | EH_prolog                 |
 | WIP     | EH_epilog                 |
 | FMT     | unknown_10005890          |
-| ????    | unknown_10005a26          |
+| FMT     | unknown_10005a26          |
+| FMT     | unknown_10005a70          |
 | ????    | unknown_10005a85          |
 | RE_OK   | CorExitProcess            |
 | ????    | unknown_10007080          |
