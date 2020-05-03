@@ -107,6 +107,20 @@
 
 [9394]  [unk]  unknown_10009394
 
+[a250]  [unk]  unknown_1000a250
+[a290]  [unk]  unknown_1000a290
+[a346]  [unk]  unknown_1000a346
+[a37c]  [unk]  unknown_1000a37c
+[a8be]  [unk]  unknown_1000a8be
+[ae00]  [unk]  unknown_1000ae00
+[b4c0]  [unk]  unknown_1000b4c0
+[b547]  [unk]  unknown_1000b547
+[b62a]  [unk]  unknown_1000b62a
+[bf47]  [unk]  unknown_1000bf47
+[bfd6]  [unk]  unknown_1000bfd6
+[c064]  [unk]  unknown_1000c064
+[c104]  [unk]  unknown_1000c104
+
 []  [unk]  unknown_
 
 
