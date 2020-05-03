@@ -26,9 +26,21 @@ ds:0x1000d1a0  ; (dword)  00 00 00 00 00 00 79 40
 ; Global variables
 ;
 
-ds:0x10011004    ; _global_PipeID
+ds:0x10010000    ; [4] / _global_DeviceHandle
 
-ds:0x10015210    ; _global_InterfaceHandle
+; WINUSB_PIPE_INFORMATION structure
+ds:0x10011000    ; [4] / _global_PipeType
+ds:0x10011004    ; [1] / _global_PipeId
+ds:0x10011005    ; [2] / _global_MaximumPacketSize
+ds:0x10011007    ; [1] / _global_Interval
+
+
+ds:0x10015210    ; [4] / _global_InterfaceHandle
+ds:0x10015214    ; [1] / _global_Device_Speed
+ds:0x10015215    ; [1] / _global_BulkIn_PipeID
+ds:0x10015216    ; [1] / _global_BulkOut_PipeID
+ds:0x10015217    ; [1] / _global_Interrupt_PipeID
+
 ds:0x1001522c    ; _global_1001522c (initialization flag?)
 
 ds:0x10015df8    ; _global_cpu_sopports_SSE2

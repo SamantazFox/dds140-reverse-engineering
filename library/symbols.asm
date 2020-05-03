@@ -27,7 +27,7 @@
 
 [3630]  [sym]  ResetPipe
 
-[3670]  [unk]  unknown_10003670
+[3670]  [fun]  init_interface
 [3750]  [fun]  free_interface
 
 [3770]  [sym]  DeviceOpen

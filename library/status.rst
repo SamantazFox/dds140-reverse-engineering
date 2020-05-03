@@ -54,7 +54,7 @@ Secondary (not exported)
 | ????    | unknown_100034a0          |
 | ????    | unknown_10003540          |
 | ????    | unknown_10003670          |
-| ????    | unknown_10003670          |
+| RE_OK   | init_interface            |
 | RE_OK   | free_interface            |
 | FMT     | unknown_100038d0          |
 | FMT     | unknown_1000397b          |
