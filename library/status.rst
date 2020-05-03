@@ -22,8 +22,8 @@ Primary (exported functions)
 | WIP     | AiReadBulkData       |
 | DONE    | BufferInit           |
 | WIP     | DataPreDisposal      |
-| TODO    | DeviceClose          |
-| TODO    | DeviceOpen           |
+| FMT     | DeviceClose          |
+| FMT     | DeviceOpen           |
 | RE_OK   | DllMain              |
 | WIP     | EventCheck           |
 | WIP     | GetBuffer4Read       |
