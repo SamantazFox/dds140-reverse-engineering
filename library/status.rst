@@ -40,7 +40,7 @@ Primary (exported functions)
 | RE_OK   | SetStableEnableOrNot |
 | RE_OK   | SetTrigInfo          |
 | TODO    | TrigDataPrepare      |
-| WIP     | USBCtrlTrans         |
+| RE_OK   | USBCtrlTrans         |
 | WIP     | USBCtrlTransSimple   |
 +---------+----------------------+
 
