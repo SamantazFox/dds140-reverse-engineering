@@ -41,7 +41,7 @@ Primary (exported functions)
 | RE_OK   | SetTrigInfo          |
 | TODO    | TrigDataPrepare      |
 | RE_OK   | USBCtrlTrans         |
-| WIP     | USBCtrlTransSimple   |
+| RE_OK   | USBCtrlTransSimple   |
 +---------+----------------------+
 
 
