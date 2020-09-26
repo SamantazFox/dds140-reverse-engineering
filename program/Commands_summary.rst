@@ -59,20 +59,20 @@ USBCtrlTrans
 |     |   -  3: CH1 - Vbias Scale - 1 V range                                  |
 |     |   -  4: CH2 - Vbias Scale - 1 V range                                  |
 |     |   -  5:	m_ZrroUniInt (??????)                                          |
-|     |   -	 6: CH1 - Vbias Scale - 200 mV range                               |
-|     |   -	 7: CH2 - Vbias Scale - 200 mV range                               |
-|     |   -	 8: CH1 - Vbias Scale - 500 mV range                               |
-|     |   -	 9: CH1 - Vbias Scale - 100 mV range                               |
-|     |   -	10: CH1 - Vbias Scale -  50 mV range                               |
-|     |   -	11: CH2 - Vbias Scale - 500 mV range                               |
-|     |   -	12: CH2 - Vbias Scale - 100 mV range                               |
-|     |   -	13: CH2 - Vbias Scale -  50 mV range                               |
-|     |   -	14: CH1 - Vbias Zero  - 500 mV range                               |
-|     |   -	15: CH2 - Vbias Zero  - 500 mV range                               |
-|     |   -	16: CH1 - Vbias Zero  -  50 mV range                               |
-|     |   -	17: CH2 - Vbias Zero  - 050 mV range                               |
-|     |   -	18: CH1 - Vbias Zero  - 100 mV range                               |
-|     |   -	19: CH2 - Vbias Zero  - 100 mV range                               |
+|     |   -  6: CH1 - Vbias Scale - 200 mV range                               |
+|     |   -  7: CH2 - Vbias Scale - 200 mV range                               |
+|     |   -  8: CH1 - Vbias Scale - 500 mV range                               |
+|     |   -  9: CH1 - Vbias Scale - 100 mV range                               |
+|     |   - 10: CH1 - Vbias Scale -  50 mV range                               |
+|     |   - 11: CH2 - Vbias Scale - 500 mV range                               |
+|     |   - 12: CH2 - Vbias Scale - 100 mV range                               |
+|     |   - 13: CH2 - Vbias Scale -  50 mV range                               |
+|     |   - 14: CH1 - Vbias Zero  - 500 mV range                               |
+|     |   - 15: CH2 - Vbias Zero  - 500 mV range                               |
+|     |   - 16: CH1 - Vbias Zero  -  50 mV range                               |
+|     |   - 17: CH2 - Vbias Zero  - 050 mV range                               |
+|     |   - 18: CH1 - Vbias Zero  - 100 mV range                               |
+|     |   - 19: CH2 - Vbias Zero  - 100 mV range                               |
 +-----+------------------------------------------------------------------------+
 | 148 | Oscilloscope - Send Control byte 0                                     |
 +-----+------------------------------------------------------------------------+
